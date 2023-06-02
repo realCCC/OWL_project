@@ -1,5 +1,6 @@
 package com.codingrecipe.member.controller;
 
+import com.codingrecipe.member.Session.SessionManager;
 import com.codingrecipe.member.dto.MemberDTO;
 import com.codingrecipe.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 public class MemberController {
     // 생성자 주입
     private final MemberService memberService;
+    private final SessionManager sessionManager;
 
     // 회원가입 페이지 출력 요청
     @GetMapping("/member/save")
@@ -41,7 +43,8 @@ public class MemberController {
         if (loginResult != null) {
             // login 성공
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
-            return "main";
+            session.setAttribute("loginName", loginResult.getMemberName());
+            return "home";
         } else {
             // login 실패
             return "login";
@@ -86,7 +89,7 @@ public class MemberController {
     @GetMapping("/member/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "index";
+        return "home";
     }
 
     @PostMapping("/member/email-check")

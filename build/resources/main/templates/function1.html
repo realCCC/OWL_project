@@ -1,0 +1,170 @@
+<!--<%@ page contentType="text/html;charset=UTF-8" %>-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Place Searches</title>
+    <style>
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script>
+    let map;
+    let infowindow;
+
+    function initMap() {
+        const sydney = new google.maps.LatLng(37.534522948, 126.994243914);
+        infowindow = new google.maps.InfoWindow();
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: sydney,
+            zoom: 15,
+        });
+
+        const request = {
+            location: sydney,
+            radius: 3000, // 반경 (미터)
+            type: "cafe",
+        };
+
+        const service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, (results, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+                for (let i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                }
+            }
+        });
+    }
+
+    function createMarker(place) {
+        if (!place.geometry || !place.geometry.location) return;
+
+        const marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location,
+        });
+
+        google.maps.event.addListener(marker, "click", () => {
+            const content = document.createElement("div");
+            const nameElement = document.createElement("h2");
+            const placeIdElement = document.createElement("p");
+            const placeAddressElement = document.createElement("p");
+            const openingHoursElement = document.createElement("p");
+            const remainingTimeElement = document.createElement("p");
+            const imageElement = document.createElement("img");
+
+            nameElement.textContent = place.name;
+            content.appendChild(nameElement);
+
+            let openStatus = "";
+
+            if (place.opening_hours && place.opening_hours.open_now) {
+                openStatus = "영업중";
+                placeIdElement.textContent = openStatus;
+                content.appendChild(placeIdElement);
+
+                placeAddressElement.textContent = place.vicinity;
+                content.appendChild(placeAddressElement);
+
+                const request = {
+                    placeId: place.place_id,
+                    fields: ["opening_hours"]
+                };
+
+                const service = new google.maps.places.PlacesService(map);
+                service.getDetails(request, (placeResult, status) => {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        if (placeResult.opening_hours && placeResult.opening_hours.weekday_text) {
+                            openingHoursElement.textContent = "영업 시간:";
+                            content.appendChild(openingHoursElement);
+
+                            const today = new Date();
+                            const currentDayIndex = today.getDay();
+                            const currentDay = placeResult.opening_hours.weekday_text[currentDayIndex - 1];
+
+                            const openingHourElement = document.createElement("p");
+                            openingHourElement.textContent = currentDay;
+                            content.appendChild(openingHourElement);
+
+                            const currentDateTime = document.createElement("p");
+                            const currentTime = today.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+                            currentDateTime.textContent = "현재 시간: " + currentTime;
+                            content.appendChild(currentDateTime);
+
+                            const closingTime = placeResult.opening_hours.periods[currentDayIndex - 1].close.time;
+                            const closingHour = parseInt(closingTime.substring(0, 2));
+                            const closingMinute = parseInt(closingTime.substring(2, 4));
+
+                            const remainingTime = calculateRemainingTime(today, closingHour, closingMinute);
+                            remainingTimeElement.textContent = "남은 시간: " + remainingTime;
+                            content.appendChild(remainingTimeElement);
+
+                            const [hours, minutes] = remainingTime.split(":");
+                            const remainingTimeInMinutes = parseInt(hours) * 60 + parseInt(minutes);
+
+                            if (remainingTimeInMinutes >= 180) { // 3시간 이상
+                                imageElement.src = "";
+                            } else if (remainingTimeInMinutes >= 120) { // 2시간 ~ 3시간
+                                imageElement.src = "";
+                            } else if (remainingTimeInMinutes >= 60) { // 1시간 ~ 2시간
+                                imageElement.src = "";
+                            } else if (remainingTimeInMinutes > 0) { // 1시간 미만
+                                imageElement.src = "";
+                            }
+
+                            imageElement.width = 100;
+                            imageElement.height = 100;
+                            content.appendChild(imageElement);
+                        }
+                    }
+
+                    if (infowindow) {
+                        infowindow.close();
+                    }
+
+                    infowindow = new google.maps.InfoWindow();
+                    infowindow.setContent(content);
+                    infowindow.open(map, marker);
+                });
+            } else {
+                openStatus = "영업 종료";
+                placeIdElement.textContent = openStatus;
+                content.appendChild(placeIdElement);
+                infowindow.setContent(content);
+                infowindow.open(map, marker);
+            }
+        });
+    }
+
+    function calculateRemainingTime(currentTime, closingHour, closingMinute) {
+        const closingTime = new Date();
+        closingTime.setHours(closingHour, closingMinute, 0);
+
+        const timeDiff = closingTime.getTime() - currentTime.getTime();
+
+        let remainingHours = Math.floor(timeDiff / (1000 * 60 * 60));
+        let remainingMinutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+        remainingHours = (remainingHours < 10) ? "0" + remainingHours : remainingHours;
+        remainingMinutes = (remainingMinutes < 10) ? "0" + remainingMinutes : remainingMinutes;
+
+        return remainingHours + ":" + remainingMinutes;
+    }
+
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=places&v=weekly" defer></script>
+</body>
+</html>
