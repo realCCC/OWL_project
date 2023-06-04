@@ -13,8 +13,20 @@ public class HomeController {
     }
 
     @GetMapping("function1")
-    public String f3(){
+    public String f1(){
         return "function1";
+    }
+    @GetMapping("function2")
+    public String f2(){
+        return "function2";
+    }
+    @GetMapping("function3")
+    public String f3(){
+        return "function3";
+    }
+    @GetMapping("roulette")
+    public String f4(){
+        return "roulette";
     }
 
     @GetMapping("/login")

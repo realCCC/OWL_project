@@ -29,19 +29,52 @@
     ></script>
 
 
-    <!--추가한부분 기능1 클릭시 새로운 창에서 구글 홈페이지 생성-->
+<!--    음식점      -->
     <script>
-        function openGoogleHomePage() {
-            window.open("https://www.google.com", "_blank");
-        }
-    </script>
-
-    <!--추가한부분 기능2 클릭시 맵 대신 다른 홈페이지 보임-->
-    <script>
-        function replaceMapWithGoogleHomepage() {
+        function replaceMapWithRestaurant() {
             var mapContainer = document.querySelector('.part1');
             var iframe = document.createElement('iframe');
             iframe.src = 'http://localhost:8080/function1';
+            iframe.style.width = '100%';
+            iframe.style.height = '100vh';
+            iframe.style.border = 'none';
+            mapContainer.innerHTML = '';
+            mapContainer.appendChild(iframe);
+        }
+    </script>
+    <!--    카페      -->
+    <script>
+        function replaceMapWithCafe() {
+            var mapContainer = document.querySelector('.part1');
+            var iframe = document.createElement('iframe');
+            iframe.src = 'http://localhost:8080/function2';
+            iframe.style.width = '100%';
+            iframe.style.height = '100vh';
+            iframe.style.border = 'none';
+            mapContainer.innerHTML = '';
+            mapContainer.appendChild(iframe);
+        }
+    </script>
+    <!--기능 3 ( 술집)-->
+    <script>
+        function replaceMapWithBar() {
+            var mapContainer = document.querySelector('.part1');
+            var iframe = document.createElement('iframe');
+            iframe.src = 'http://localhost:8080/function3';
+            iframe.style.width = '100%';
+            iframe.style.height = '100vh';
+            iframe.style.border = 'none';
+            mapContainer.innerHTML = '';
+            mapContainer.appendChild(iframe);
+        }
+    </script>
+
+    <!--룰렛-->
+    <script>
+        function replaceMapWithRoulette() {
+            var mapContainer = document.querySelector('.part1');
+            var iframe = document.createElement('iframe');
+            iframe.src = 'http://localhost:8080/roulette';
             iframe.style.width = '100%';
             iframe.style.height = '100vh';
             iframe.style.border = 'none';
@@ -173,12 +206,10 @@
             <a href="http://localhost:8080">Owl restaurant</a>
         </div>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript:void(0);"
-               onclick="openGoogleHomePage()">음식점</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript:void(0);"
-               onclick="replaceMapWithGoogleHomepage()">카페</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">술집</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">기능4</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript:void(0);" onclick="replaceMapWithRestaurant()">음식점</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript:void(0);" onclick="replaceMapWithCafe()">카페</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript:void(0);" onclick="replaceMapWithBar()">술집</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript:void(0);" onclick="replaceMapWithRoulette()">룰렛</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">기능5</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">기능6</a>
         </div>
