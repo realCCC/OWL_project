@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>심야식당</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -83,6 +83,24 @@
         }
     </script>
 
+    <script>
+        function boardClick() {
+            var mapContainer = document.querySelector('.part1');
+            var iframe = document.createElement('iframe');
+            iframe.src = 'http://localhost:8080/board/list';
+            iframe.style.width = '100%';
+            iframe.style.height = '100vh';
+            iframe.style.border = 'none';
+            mapContainer.innerHTML = '';
+            mapContainer.appendChild(iframe);
+        }
+    </script>
+
+    <script>
+        function showAlert() {
+            alert("로그인 후 접근가능한 권한입니다."); // 원하는 알림창 내용으로 수정하세요.
+        }
+    </script>
 </head>
 
 <body>
@@ -210,8 +228,8 @@
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript:void(0);" onclick="replaceMapWithCafe()">카페</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript:void(0);" onclick="replaceMapWithBar()">술집</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript:void(0);" onclick="replaceMapWithRoulette()">룰렛</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">기능5</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">기능6</a>
+            <a th:if="${#strings.isEmpty(session.loginEmail)}" class="list-group-item list-group-item-action list-group-item-light p-3" onclick="showAlert()">게시판</a>
+            <a th:if="${not #strings.isEmpty(session.loginEmail)}" class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript:void(0);" onclick="boardClick()">게시판</a>
         </div>
     </div>
     <!-- Page content wrapper-->
