@@ -3,16 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글 상세 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+        }
+
+        p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
-    <h1 th:text="${board.title}">제목입니다.</h1>
-    <p th:text="${board.content}">내용이 들어갈 부분입니다.</p>
+<h1 th:text="${ board.title}">제목입니다.</h1>
+<br>
+<p th:text="${board.content}">내용이 들어갈 부분입니다.</p>
 
-    <a th:href="@{${board.filepath}}">다운받기</a>
+<a th:href="@{${board.filepath}}">다운받기</a>
 
-    <a th:href="@{/board/delete(id=${board.id})}">글삭제</a>
-    <a th:href="@{/board/modify/{id}(id=${board.id})}">글수정</a>
+<a th:href="@{/board/delete(id=${board.id})}">글삭제</a>
+<a th:href="@{/board/modify/{id}(id=${board.id})}">글수정</a>
 
 </body>
 </html>

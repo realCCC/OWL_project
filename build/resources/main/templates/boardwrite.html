@@ -3,37 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글 작성폼</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .layout {
+            width: 500px;
+            margin: 0 auto;
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .layout input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .layout textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box;
+            resize: none;
+            height: 300px; /* 내용 영역의 높이 조정 */
+        }
+
+        .layout input[type="file"] {
+
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .layout button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .layout button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
-<style>
-    .layout{
-        width: 500px;
-        margin: 0 auto;
-        margin-top: 40px;
-    }
-
-    .layout input{
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .layout textarea{
-        width: 100%;
-        margin-top: 10px;
-        min-height: 300px;
-    }
-</style>
-
 <body>
-    <div class="layout">
-        <form action="/board/writepro" method="post" enctype="multipart/form-data">
-            <input name="title" type="text">
-            <textarea name="content"></textarea>
+<div class="layout">
+    <form action="/board/writepro" method="post" enctype="multipart/form-data">
+        <input name="title" type="text" placeholder="제목">
+        <textarea name="content" placeholder="내용"></textarea>
 
-            <input type="file" name="file">
+        <input type="file" name="file">
 
-            <button type="submit">작성</button>
-        </form>
-    </div>
+
+        <button type="submit">작성</button>
+    </form>
+</div>
 </body>
 </html>

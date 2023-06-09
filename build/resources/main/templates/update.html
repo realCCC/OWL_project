@@ -4,14 +4,66 @@
 <head>
     <meta charset="UTF-8">
     <title>update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
+
 <body>
 <form action="/member/update" method="post">
-  <input type="hidden" th:value="${updateMember.id}" name="id"><br>
-  이메일: <input type="text" th:value="${updateMember.memberEmail}" name="memberEmail" readonly> <br>
-  비밀번호: <input type="text" th:value="${updateMember.memberPassword}" name="memberPassword"> <br>
-  이름: <input type="text" th:value="${updateMember.memberName}" name="memberName"> <br>
-  <input type="submit" value="정보수정">
+    <input type="hidden" th:value="${updateMember.id}" name="id"><br>
+    <h1>회원 정보 수정</h1>
+    <label for="memberEmail">이메일:</label>
+    <input type="text" th:value="${updateMember.memberEmail}" name="memberEmail" readonly><br>
+    <label for="memberPassword">비밀번호:</label>
+    <input type="password" th:value="${updateMember.memberPassword}" name="memberPassword"><br>
+    <label for="memberName">이름:</label>
+    <input type="text" th:value="${updateMember.memberName}" name="memberName"><br>
+    <input type="submit" value="정보 수정">
 </form>
 </body>
+
 </html>
