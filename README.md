@@ -1,5 +1,7 @@
-# 스프링 부트 + mariadb + Spring Data JPA를 활용한 심야식당 찾기 웹서비스 프로젝트 입니다. 
+# 👉프로젝트 소개
 
+> 스프링 부트 + mariadb + Spring Data JPA를 활용한 심야식당 찾기 웹서비스 프로젝트 입니다.  <br>
+> 서비스 명은 OWL Project 입니다.
 
 
 # 주요 기능 
