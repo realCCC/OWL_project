@@ -42,10 +42,11 @@
 
 ## 데이터베이스 구성
 다음은 데이터베이스 구성입니다. <br>
-![image](https://github.com/realCCC/OWL_project/assets/101503824/1fb7e42e-0915-47a8-ab75-4accce400342)
+![image](https://github.com/realCCC/OWL_project/assets/101503824/f57fbe08-1b66-456e-ab23-8bc20e8994e2)
 
-| ![이미지 1 설명](https://github.com/realCCC/OWL_project/assets/101503824/fa17f50c-b831-4147-8025-65aae706a824) | ![이미지 2 설명](https://github.com/realCCC/OWL_project/assets/101503824/fc07a309-42d7-4da4-8402-0b1eaccf79c9) | ![이미지 3 설명](https://github.com/realCCC/OWL_project/assets/101503824/379c0a2f-82b4-4fb2-986a-228b867340f2) |
-|---|---|---|
+| ![이미지 1 설명](https://github.com/realCCC/OWL_project/assets/101503824/fa17f50c-b831-4147-8025-65aae706a824) | ![이미지 2 설명](https://github.com/realCCC/OWL_project/assets/101503824/379c0a2f-82b4-4fb2-986a-228b867340f2) |
+|---|---|
+
 
 
 
