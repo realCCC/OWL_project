@@ -75,8 +75,10 @@
 <form th:action="@{/board/update/{id}(id=${board.id})}" method="post">
     <div class="container">
         <div class="form-group">
-            <label for="author">작성자</label>
-            <input type="text" class="form-control" id="author" placeholder="작성자명">
+            <input type="hidden" id="writer" name="writer" th:value="${session.loginEmail}" >
+            <input type="hidden" id="nickname" name="nickname" th:value="${session.loginName}" >
+
+            <input type="text" class="form-control" id="author" th:value="${session.loginName}" readonly>
         </div>
         <div class="form-group">
             <label for="title">제목</label>
