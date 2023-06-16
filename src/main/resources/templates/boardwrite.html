@@ -88,9 +88,11 @@
         <div class="container">
             <div class="form-group">
                 <label for="author" >작성자</label>
+<!--                <div th:text="${session.loginEmail}" />-->
+                <input type="hidden" id="writer" name="writer" th:value="${session.loginEmail}" >
+                <input type="hidden" id="nickname" name="nickname" th:value="${session.loginName}" >
 
-
-                <input type="text" class="form-control" id="author" placeholder="작성자명">
+                <input type="text" class="form-control" id="author" th:value="${session.loginName}" readonly>
             </div>
             <div class="form-group">
                 <label for="title">제목</label>
@@ -101,7 +103,7 @@
             </div>
             <input type="file" name="file">
             <div class="text-right">
-                <button type="button" class="btn btn-primary" id="cancelBtn"><a th:href="@{/board/list}">취소</a></button>
+                <a class="btn btn-primary" th:href="@{/board/list}">취소</a>
                 <button type="submit" class="btn btn-primary" id="updateBtn">작성하기</button>
             </div>
         </div>

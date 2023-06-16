@@ -25,5 +25,7 @@ public class Board {
 
     private String writer;
 
+    private String nickname;
+
 
 }

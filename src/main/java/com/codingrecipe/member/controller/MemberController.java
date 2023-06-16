@@ -76,9 +76,11 @@ public class MemberController {
     }
 
     @PostMapping("/member/update")
-    public String update(@ModelAttribute MemberDTO memberDTO) {
+    public String update(@ModelAttribute MemberDTO memberDTO,HttpSession session) {
+        session.setAttribute("loginName", memberDTO.getMemberName());
         memberService.update(memberDTO);
-        return "redirect:/member/" + memberDTO.getId();
+        //return "redirect:/member/" + memberDTO.getId();
+        return "redirect:/";
     }
 
     @GetMapping("/member/delete/{id}")
