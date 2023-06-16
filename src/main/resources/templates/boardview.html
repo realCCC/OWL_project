@@ -37,9 +37,9 @@
 </head>
 <body>
 
-<h1 th:text="${ board.title}">제목입니다.</h1>
+<h1 th:text="${board.title}">제목입니다.</h1>
 <br>
-<p th:text="${board.content}">내용이 들어갈 부분입니다.</p>
+<p th:utext="${board.content}">내용이 들어갈 부분입니다.</p>
 
 <a th:href="@{${board.filepath}}">다운받기</a>
 

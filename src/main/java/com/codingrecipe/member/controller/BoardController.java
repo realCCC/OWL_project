@@ -39,9 +39,10 @@ public class BoardController {
     public String boardWritePro(Board board, Model model, MultipartFile file) throws Exception{
 
         boardService.write(board, file); //Autowired를 통해서 boardservice를 불러옴
+        Board createdBoard = boardService.boardView(board.getId());
 
         model.addAttribute("message","글 작성이 완료되었습니다.");
-        model.addAttribute("searchUrl","/board/list");
+        model.addAttribute("searchUrl","/board/view?id=" + createdBoard.getId());
 
         return "message";
     }

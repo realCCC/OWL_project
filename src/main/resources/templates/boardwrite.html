@@ -3,77 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글 작성폼</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-        }
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f2f2f2;-->
+<!--        }-->
 
-        .layout {
-            width: 500px;
-            margin: 0 auto;
-            margin-top: 40px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+<!--        .layout {-->
+<!--            width: 500px;-->
+<!--            margin: 0 auto;-->
+<!--            margin-top: 40px;-->
+<!--            background-color: #fff;-->
+<!--            padding: 20px;-->
+<!--            border-radius: 5px;-->
+<!--            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
 
-        .layout input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
+<!--        .layout input[type="text"] {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            margin-bottom: 10px;-->
+<!--            border: 1px solid #ddd;-->
+<!--            border-radius: 3px;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
 
-        .layout textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            box-sizing: border-box;
-            resize: none;
-            height: 300px; /* 내용 영역의 높이 조정 */
-        }
+<!--        .layout textarea {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            margin-bottom: 10px;-->
+<!--            border: 1px solid #ddd;-->
+<!--            border-radius: 3px;-->
+<!--            box-sizing: border-box;-->
+<!--            resize: none;-->
+<!--            height: 300px; /* 내용 영역의 높이 조정 */-->
+<!--        }-->
 
-        .layout input[type="file"] {
+<!--        .layout input[type="file"] {-->
 
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
+<!--            margin-top: 10px;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
 
-        .layout button[type="submit"] {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 3px;
-            background-color: #007bff;
-            color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-        }
+<!--        .layout button[type="submit"] {-->
+<!--            display: block;-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            border: none;-->
+<!--            border-radius: 3px;-->
+<!--            background-color: #007bff;-->
+<!--            color: #fff;-->
+<!--            font-weight: bold;-->
+<!--            cursor: pointer;-->
+<!--        }-->
 
-        .layout button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-    </style>
+<!--        .layout button[type="submit"]:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+<!--    </style>-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- 서머노트를 위해 추가해야 할 부분 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <!--  -->
 </head>
 
 <body>
 <div class="layout">
+<!--    <form action="/board/writepro" method="post" enctype="multipart/form-data">-->
+<!--        <input name="title" type="text" placeholder="제목">-->
+<!--        <textarea name="content" placeholder="내용"></textarea>-->
+
+<!--        <input type="file" name="file">-->
+
+
+<!--        <button type="submit">작성</button>-->
+<!--    </form>-->
+
     <form action="/board/writepro" method="post" enctype="multipart/form-data">
-        <input name="title" type="text" placeholder="제목">
-        <textarea name="content" placeholder="내용"></textarea>
+        <div class="container">
+            <div class="form-group">
+                <label for="author" >작성자</label>
 
-        <input type="file" name="file">
 
-
-        <button type="submit">작성</button>
+                <input type="text" class="form-control" id="author" placeholder="작성자명">
+            </div>
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="제목">
+            </div>
+            <div class="form-group">
+                <textarea name="content" id="summernote" placeholder="내용"></textarea>
+            </div>
+            <input type="file" name="file">
+            <div class="text-right">
+                <button type="button" class="btn btn-primary" id="cancelBtn"><a th:href="@{/board/list}">취소</a></button>
+                <button type="submit" class="btn btn-primary" id="updateBtn">작성하기</button>
+            </div>
+        </div>
     </form>
 </div>
 </body>
+
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            height: 150,
+            lang: "ko-KR",
+            focus: true,
+            toolbar: [
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                ['color', ['forecolor', 'color']],
+                ['table', ['table']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert', ['picture', 'link', 'video']],
+                ['view', ['codeview', 'fullscreen', 'help']]
+            ],
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
+            fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+        });
+
+        $('#cancelBtn').on('click', function () {
+            // 작성자, 제목, 내용 초기화
+            $('#author').val('');
+            $('#title').val('');
+            $('#summernote').summernote('destroy');
+        });
+
+        $('#updateBtn').on('click', function () {
+            var author = $('#author').val();
+            var title = $('#title').val();
+            var content = $('#summernote').summernote('code');
+
+            // 수정 로직 실행
+            // ...
+        });
+    });
+</script>
+
 </html>
