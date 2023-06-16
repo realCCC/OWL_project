@@ -4,6 +4,19 @@
 > 서비스 명은 OWL Project 입니다. <br>
 > API와 스프링 부트를 활용한 심야시간 음식점을 찾는 웹서비스입니다. 사용자는 심야시간에 영업하는 음식점을 찾을 수 있습니다.
 
+# 개발환경
+
+## 프론트엔드
+-프로그래밍언어 : HTML, CSS, JavaScript
+## 백엔드
+프로그래밍 언어: Java <br>
+프레임워크: Spring <br>
+데이터베이스: MySQL <br>
+클라이언트 도구(DB): HeidiSQL <br>
+<br>
+### 구글맵 API: Google Maps JavaScript API
+### 웹 서버: Apache
+
 # 주요 기능 
 - 회원가입
 - 로그인
