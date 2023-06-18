@@ -17,7 +17,7 @@
 웹 뷰 및 템플릿: BootStrap, Thymeleaf <br>
 배포 및 형상 관리: Git, Github <br>
 
-<br>
+
 ### 구글맵 API: Google Maps JavaScript API
 ### 웹 서버: Apache
 
