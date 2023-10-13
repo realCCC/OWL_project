@@ -13,7 +13,7 @@
 -프로그래밍언어 : HTML, CSS, JavaScript
 ## 백엔드
 프로그래밍 언어: Java <br>
-프레임워크: Spring , Spring Data JPA, Spring Web MVC <br>
+프레임워크: Spring Boot, Spring Data JPA, Spring Web MVC <br>
 개발 환경 및 생산성: Gradle, Lombok, Tomcat <br>
 데이터베이스: MySQL <br>
 클라이언트 도구(DB): HeidiSQL <br>
